@@ -17,22 +17,25 @@ p1 >> pluck([0, 2, 4, 6, 7])
 # Change to minor
 p1 >> pluck([0, 2, 4, 6, 7], scale=Scale.minor)
 
-p1 >> pluck([0, 1, 2], dur=[1, 1/2, 1/2], amp=[1, 0.5, 1/3])
+p1 >> pluck([0, 1, 2], dur=[1, 1 / 2, 1 / 2], amp=[1, 0.5, 1 / 3])
 
 p1 >> pluck(
-      dur=1/4, 
-      amp=[1, 1/2, 1/2, 1, 0, 1, 0, 1, 1/2, 1/2, 1, 0, 1, 1/2, 1/4, 1]
+    dur=1 / 4,
+    amp=[1, 1 / 2, 1 / 2, 1, 0, 1, 0, 1, 1 / 2, 1 / 2, 1, 0, 1, 1 / 2, 1 / 4, 1],
 )
 
 p1 >> pluck(
-    dur=1/4, 
-    amp=[1, 1/2, 1/2, 1, 0, 1, 0, 1, 1/2, 1/2, 1, 0, 1, 1/2, 1/4, 1], 
-    amplify=var([1,0],[6,2])
+    dur=1 / 4,
+    amp=[1, 1 / 2, 1 / 2, 1, 0, 1, 0, 1, 1 / 2, 1 / 2, 1, 0, 1, 1 / 2, 1 / 4, 1],
+    amplify=var([1, 0], [6, 2]),
 )
 
-p1 >> pluck(dur=1/4, amp=[1, 1/2, 1/2, 1, 0, 1, 0, 1, 1/2, 1/2, 1, 0, 1, 1/2, 1/4, 1])
-p2 >> bass(var([0, 3], 8), dur=1/2)
-Group(p1, p2).amplify = var([1,0],4)
+p1 >> pluck(
+    dur=1 / 4,
+    amp=[1, 1 / 2, 1 / 2, 1, 0, 1, 0, 1, 1 / 2, 1 / 2, 1, 0, 1, 1 / 2, 1 / 4, 1],
+)
+p2 >> bass(var([0, 3], 8), dur=1 / 2)
+Group(p1, p2).amplify = var([1, 0], 4)
 
 # Plays at the Clock.bpm tempo (default 120)
 p1 >> pluck([0, 1, 2, 3])
@@ -53,11 +56,7 @@ p1 >> play("x-o-", sample=1)
 p1 >> play("x-o-", sample=[0, 1, 2])
 
 # Change the root every 8 beats
-p1 >> blip([0, 7, 6, 4, 2], 
-    dur=1/4, 
-    sus=2,
-    root=var([0, 2], 8)
-)
+p1 >> blip([0, 7, 6, 4, 2], dur=1 / 4, sus=2, root=var([0, 2], 8))
 
 # Slide effect added
 p1 >> pluck(dur=4, slide=1, slidedelay=0.5)
@@ -69,25 +68,25 @@ p1 >> pluck(dur=4, slide=0, slidedelay=0.5)
 p1 >> pluck(dur=4, slide=1, slidedelay=0)
 
 # One beat duration, half-beat duration
-p1 >> pluck(dur=1, sus=1/2)
+p1 >> pluck(dur=1, sus=1 / 2)
 
 # Doubles the length of every other note
-p1 >> pluck(dur=PDur(3,8), blur=[1, 2])
+p1 >> pluck(dur=PDur(3, 8), blur=[1, 2])
 
 # Alternate between left, center, and right
-p1 >> pluck(pan = [-1, 0, 1])
+p1 >> pluck(pan=[-1, 0, 1])
 
 # Play two notes at the same time, but in different speakers
-p1 >> pluck((0, 4), pan=(-1,1))
+p1 >> pluck((0, 4), pan=(-1, 1))
 
 # Gradually move the sound's panning from left to right using a "linvar"
-p1 >> pluck([0, 2, 4, 7], dur=1/4, pan=linvar([-1,1],8))
+p1 >> pluck([0, 2, 4, 7], dur=1 / 4, pan=linvar([-1, 1], 8))
 
 # Simple flanger effect
-p1 >> pluck(fmod = 2)
+p1 >> pluck(fmod=2)
 
 # Vary the effect over time
-p1 >> pluck(fmod=linvar([-10,10],8), dur=1/4, sus=1)
+p1 >> pluck(fmod=linvar([-10, 10], 8), dur=1 / 4, sus=1)
 
 p1 >> pads(dur=4, vib=4)
 
@@ -123,13 +122,13 @@ p1 >> pluck(dur=4, bend=-1)
 p1 >> pluck(dur=4, slide=0.5, bend=0.5)
 
 # Chop a sound into 4 parts
-p1 >> pluck([0,1,2,3], dur=4, chop=4)
+p1 >> pluck([0, 1, 2, 3], dur=4, chop=4)
 
 # If the duration varies, the sizes of chop will vary too
-p1 >> pluck([0,[4,6,7]], dur=PDur(3,8), chop=4)
+p1 >> pluck([0, [4, 6, 7]], dur=PDur(3, 8), chop=4)
 
 # Changing a single value for "sus" evens out the sizes and creates a nice overlapping echo effect
-p1 >> pluck([0,[4,6,7]], dur=PDur(3,8), chop=4, sus=2)
+p1 >> pluck([0, [4, 6, 7]], dur=PDur(3, 8), chop=4, sus=2)
 
 # Using chop
 c1 >> play("C", dur=4, chop=16, coarse=0)
@@ -145,7 +144,7 @@ b1 >> bass(dur=2, coarse=4, chop=0)
 d1 >> play("x-o-", hpf=2000)
 
 # Set the cutoff to change over time using a linvar
-d1 >> play("x-o-", hpf=linvar([0,2000],32))
+d1 >> play("x-o-", hpf=linvar([0, 2000], 32))
 
 # Set the high pass filter cutoff to 2000 Hz
 d1 >> play("x-o-", hpf=2000)
@@ -154,7 +153,7 @@ d1 >> play("x-o-", hpf=2000)
 d1 >> play("x-o-", hpf=2000, hpr=0.2)
 
 # Set the cutoff *and* resonance to change over time using linvar
-d1 >> play("x-o-", hpf=linvar([0,2000],32), hpr=linvar([1,0.1],28))
+d1 >> play("x-o-", hpf=linvar([0, 2000], 32), hpr=linvar([1, 0.1], 28))
 
 # Set the low pass filter cutoff to 400 Hz
 d1 >> play("x-o-", lpf=400)
@@ -163,7 +162,7 @@ d1 >> play("x-o-", lpf=400)
 d1 >> play("x-o-", lpf=400, lpr=0.2)
 
 # Use a linvar to vary both values over time
-d1 >> play("x-o-", lpf=linvar([500,5000],32), lpr=linvar([1,0.1],28))
+d1 >> play("x-o-", lpf=linvar([500, 5000], 32), lpr=linvar([1, 0.1], 28))
 
 # Apply the bit-crusher effect
 d1 >> play("X O ", crush=4)
@@ -177,15 +176,15 @@ d1 >> play("X O ", crush=32, bits=8)
 # Add distortion to both sample and synth players
 d1 >> play("x * ", dist=0.2)
 
-p1 >> dirt([0,5], dist=0.3, dur=8) + (0,4)
+p1 >> dirt([0, 5], dist=0.3, dur=8) + (0, 4)
 
 # Add distortion to both sample and synth players
 d1 >> play("x * ", shape=0.5)
 
-p1 >> dirt([0,5], shape=0.5, dur=8) + (0,4)
+p1 >> dirt([0, 5], shape=0.5, dur=8) + (0, 4)
 
 # Add overdrive distortion
-p1 >> dirt(dur=1/2, drive=1)
+p1 >> dirt(dur=1 / 2, drive=1)
 
 # Emulate playing the sounds in a small room
 p1 >> play("x o ", room=0.25)
@@ -211,7 +210,7 @@ p1 >> blip(dur=4, echo=1)
 p1 >> blip(dur=4, echo=1, echotime=8)
 
 # We can use echo to make drum loops more interesting too
-d1 >> play("(x )( x)o ", room=0.1, echo=0.75/2, echotime=4)
+d1 >> play("(x )( x)o ", room=0.1, echo=0.75 / 2, echotime=4)
 
 # Move the pan left to right 4 times across 4 beats
 p1 >> pads(dur=4, spin=4)
@@ -231,10 +230,39 @@ p1 >> pluck(formant=P[:8])
 p1 >> pads(dur=4, tremolo=2)
 
 # Shift a synth's pitch
-p1 >> pads(pshift=[0,1,2,3])
+p1 >> pads(pshift=[0, 1, 2, 3])
 
 # Shift a sample's pitch
-p2 >> play("C", dur=2, pshift=[0,1,2,3])
+p2 >> play("C", dur=2, pshift=[0, 1, 2, 3])
 
 # Can be used to make chords
-p2 >> play("C", dur=2, pshift=[0, (0,4,7)], sample=3)
+p2 >> play("C", dur=2, pshift=[0, (0, 4, 7)], sample=3)
+
+# Glide to and from the 5th note in the scale (7th semitone)
+p1 >> pluck([0, 4], dur=4, glide=[7, -7])
+
+p1 >> pluck([0, 1, 2, 3, 4, 5, 6, 7]).every(8, "reverse")
+
+p1 >> pluck([0, 1, 2, 3, 4, 5, 6, 7]).every([6, 2], "reverse")
+
+p1 >> pluck([0, 1, 2, 3, 4, 5, 6, 7]).every(PRand([2, 4, 8]), "reverse")
+
+# Call "reverse" every 8 beats *and* every 5 beatss
+d1 >> pluck([0, 1, 2, 3, 4, 5, 6, 7]).every(8, "reverse").every(5, "reverse", ident=1)
+
+d1 >> play("x-o-").every(6, "stutter", cycle=8)
+
+# Play the event 4 times every 6 beats across 1/2 a beat
+d1 >> play("x-o-", dur=1 / 2).every(6, "stutter", 4)
+
+# Play the event 4 times every 6 beats across 3 beats
+d1 >> play("x-o-", dur=1 / 2).every(6, "stutter", 4, dur=3)
+
+# You can also specify the number of events to stutter using the 'n' keyword
+d1 >> play("x-o-", dur=1 / 2).every(6, "stutter", dur=3, n=4)
+
+# Stutter 8 times with increasing playback speed
+d1 >> play("x-o-").every(4, "stutter", 8, rate=[1, 2, 3, 4, 5, 6, 7, 8])
+
+# Stutter 4 times with alternating panning and higher rate
+d1 >> play("x-o-").every(4, "stutter", 4, dur=3, pan=[-1, 1], rate=2)
