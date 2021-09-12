@@ -1,6 +1,6 @@
 # type: ignore
 
-Clock.bpm = 125
+Clock.bpm = 123
 
 
 p1 >> pluck(

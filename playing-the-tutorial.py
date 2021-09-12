@@ -266,3 +266,24 @@ d1 >> play("x-o-").every(4, "stutter", 8, rate=[1, 2, 3, 4, 5, 6, 7, 8])
 
 # Stutter 4 times with alternating panning and higher rate
 d1 >> play("x-o-").every(4, "stutter", 4, dur=3, pan=[-1, 1], rate=2)
+
+# You can still use tuples / PGroups to add simultaneous effects
+d1 >> play("x-o-").every(4, "stutter", 4, dur=1, pan=(-1, 1), rate=(4, 1 / 2))
+
+# Calls the "trim" method on the degree attribute
+d1 >> play("x-o-").every(4, "trim", 3)
+
+# Trim the octave pattern to 3 every 4 beats
+p1 >> pluck(oct=[4, 5, 6, 7]).every(4, "oct.trim", 3)
+
+# Play a note 2 steps higher delayed 1/2 a beat
+p1 >> pasha([0, 4], dur=[3 / 4, 3 / 4, 1 / 2]).every(3, "offadd", 2)
+
+# Play a note 4 steps higher delayed 3/4 of a beat
+p1 >> pasha([0, 1, 3, 4], dur=1 / 2).every(5, "offadd", 4, 3 / 4)
+
+p1 >> play("x-o-").every(4, "stutter", 4, dur=[3, 2])  # makes an error!
+
+p1 >> play("x-o-").every(4, "stutter", 4, dur=Cycle([3, 2]))
+
+
