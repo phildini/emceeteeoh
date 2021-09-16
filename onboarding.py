@@ -3,9 +3,13 @@
 Clock.bpm = 123
 
 
-p1 >> pluck(
-    [0, 1, 2, 3],
-    delay=[0, 0.5, 0, 1.5],
+(
+    a1
+    >> pluck(
+        [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 4, 0, 1],
+        delay=[0, 0.5, 0, 1.5],
+        amp=[0.5, 1, 0.5, 1.5],
+    )
 )
 
 p2 >> dirt(
@@ -20,12 +24,15 @@ p3 >> star(
     amp=[1, 1 / 2, 1 / 2, 1, 0, 1, 0, 1, 1 / 2, 1 / 2, 1, 0, 1, 1 / 2, 1 / 4, 1],
 )
 
+# d_all.stop()
+
+# p_all.stop()
+
 # Stutter 4 times with alternating panning and higher rate
 d1 >> play("x-o-").every(4, "stutter", 4, dur=3, pan=[-1, 1], rate=2)
 
-p1.stop()
+d2 >> dbass([0, 0, 0, 4, 0, 0, 0, -4], amp=[0.5])
 
-# You can also specify the number of events to stutter using the 'n' keyword
-d1 >> play("x-o-", dur=1 / 2).every(6, "stutter", dur=3, n=4)
+Group(p2, d2).only()
 
-p1.solo()
+a1.solo()
