@@ -241,6 +241,8 @@ p2 >> play("C", dur=2, pshift=[0, (0, 4, 7)], sample=3)
 # Glide to and from the 5th note in the scale (7th semitone)
 p1 >> pluck([0, 4], dur=4, glide=[7, -7])
 
+## 2.3
+
 p1 >> pluck([0, 1, 2, 3, 4, 5, 6, 7]).every(8, "reverse")
 
 p1 >> pluck([0, 1, 2, 3, 4, 5, 6, 7]).every([6, 2], "reverse")
@@ -286,4 +288,65 @@ p1 >> play("x-o-").every(4, "stutter", 4, dur=[3, 2])  # makes an error!
 
 p1 >> play("x-o-").every(4, "stutter", 4, dur=Cycle([3, 2]))
 
+## 2.4
 
+p1 >> play("x-o-")
+
+# Simple pattern
+p1 >> play("(x-)(-x)o-")
+
+# Nested brackets for more variety
+p1 >> play("(x-)(-(xo))o-")
+
+# Plays a triplet on the fourth steps
+p1 >> play("x-o[---]", dur=1)
+
+# Can be used in the round brackets
+p1 >> play("(x-)(-[-x])o-")
+
+# Can contain round brackets
+p1 >> play("x-o[-(xo)]")
+
+# Randomly pick a sample on the fourth step
+p1 >> play("x-o{-ox}")
+
+# Can contain [square brackets]
+p1 >> play("x-o{[--]ox}")
+
+# Can be put inside square brackets
+p1 >> play("x-o[-{ox}]")
+
+p1 >> play("x-o-", sample=1)
+
+p1 >> play("x-o-", sample=[0, 1, 2])
+
+p1 >> play("x-o-", sample=(0, 3))
+
+# Plays sample=2 for the 'o' character
+p1 >> play("x-|o2|-")
+
+# Will override the sample keyword
+p1 >> play("x-|o2|-", sample=3)
+
+# Alternate the sample number
+p1 >> play("x-|o(12)|-")
+
+# Alternate the sample character
+p1 >> play("x-|(o*)2|-")
+
+# Play multiple different samples in one step
+p1 >> play("x-|o[23]|-")
+
+# Play random sample selection
+p1 >> play("x-|o{1[23]}|-")
+
+p1 >> play("x-o-")
+p2 >> play("  + + [ +]")
+
+p1 >> play("<x-o-><  + + [ +]>")
+
+# Hard pan each sequence to left and right channels
+p1 >> play("<x-o-><  + + [ +]>", pan=(-1, 1))
+
+# Change the sample used in the first layer
+p1 >> play("<x-o-><  + + [ +]>", sample=(2, 0))
